@@ -1,0 +1,66 @@
+
+
+In this section, the strategies for oscillation analysis in \Gls{TK}.
+There are three main analysis on \Gls{TK} that produce oscillation
+parameter result. Two of them use a semi-frequentist approach and
+essentially produce confidence intervals, after running a fit over
+oscillation parameters and nuisance parameters, these two analysis are
+called \gls{p-theta} and \Gls{VALOR}~\cite{VALOR}. The other one uses
+a Markov-Chain Monte Carlo (\Gls{MCMC}) to sample over the parameter
+space, called \Gls{MaCh3}~\cite{MACH3}. It is a fully bayesian
+analysis and produces credible intervals on neutrino mixing parameter.
+
+These analyses use the input of different \Gls{TK} groups. The inputs
+are listed here:
+\begin{itemize}
+\item The beam group provides the absolute flux of histogram (such as
+  the one shown in Figure~\ref{fig:flux}), the flux covariance matrix
+  which encloses all the on these histograms (see
+  Figure~\ref{fig:fluxcov}) and the flux tuning which is, as described
+  in Section~\ref{fig:beamline}, gotten from in situ measurement of the
+  beam and additional hadron production data.
+\item The neutrino interaction working group (\Gls{NIWG}) provides a
+  parametrisation for the cross section and prefit systematic errors
+  on each of the nuisance parameter of interest. These generally rely
+  on the use of external data sets and fit such as the one described
+  in Ref.~\cite{CallumFit}, discussions with theorists, and intense
+  phenomenological questioning.
+\item The \Gls{ND} data, which is used prior to main oscillation fit
+  to contrain the flux and cross section systematic
+  uncertainties. Traditionally, the \Gls{ND} data that was used for
+  the fits was restricted to the \Gls{numu} and \Gls{anumu} data,
+  however the aim of this analysis is to unclude the \Gls{nue} data to
+  constrain parameter additional cross section and flux parameters.
+\item The \Gls{SK} \Gls{CCQE}-like \gls{numu}, \gls{nue}, \gls{anumu}
+  and \gls{anumu} samples, along with the \Gls{nue} \Gls{CC}$1\pi^+$
+  sample.
+\end{itemize}
+
+Note that there is much more data from the \Gls{ND} than the
+\Gls{SK}. This means that \Gls{ND} data uncertainty is largely
+dominated by systematics, whereas the \Gls{SK} data uncertainty is
+mostly statistical (especially for the appearance samples, the
+\gls{nue} and \gls{anue}), although this is become less and less true
+as \Gls{TK} data is being collected.
+
+For all three analyses, the first step is to only fit the \Gls{ND}
+data to constrain parameters. Once an acceptable p-value is reached,
+it is considered that the parametrisation is sufficient for an
+oscillation fit.
+
+There are other mechanisms to check that the parametrisation is
+sufficient under significant change of cross section models, called
+fake data, but these are beyond the scope of the analysis that is
+presented here.
+
+In this section, the focus is on the \Gls{ND} fits that are used in
+frequentist oscillation analysis. This step is essential to reduce the
+systematic uncertainties on the cross section and neutrino flux.
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "Thesis"
+%%% End:

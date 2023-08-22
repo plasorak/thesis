@@ -1,0 +1,79 @@
+%\usepackage[draft]{graphicx}
+\usepackage{graphicx}    
+%% \usepackage{dcolumn}
+\usepackage{multirow}
+\usepackage{amsmath,braket}
+\newcommand{\colvec}[2][.8]{%
+  \scalebox{#1}{%
+    \renewcommand{\arraystretch}{.8}%
+    $\begin{pmatrix}#2\end{pmatrix}$%
+  }
+}
+
+%% \usepackage{blindtext}
+%% \usepackage{epsfig}
+%% \usepackage{subfigure}
+%% \usepackage{color}
+%% \usepackage{verbatim} % needed for multi-line comments
+%% \usepackage{rotating} % needed for sidewaystable
+%% \usepackage{hhline}
+\usepackage{xspace}
+\usepackage{tabularx,ragged2e,booktabs}
+\usepackage[utf8]{inputenc}
+\newcolumntype{L}{>{\RaggedRight\arraybackslash}X} % ragged-right version of "X"
+\usepackage[labelfont={bf,it}]{caption}
+\usepackage{hyperref}
+% \usepackage[sort,compress,numbers]{natbib}
+% \usepackage[sort,compress,numbers]{bibtex}
+\usepackage{doi}
+\usepackage[toc,section=chapter,acronym,xindy,nonumberlist]{glossaries} % nomain, if you define glossaries in a file, and you use \include{INP-00-glossary}
+\makeglossaries
+\usepackage[xindy]{imakeidx}
+\makeindex
+%% \usepackage{SIunits}
+%% \usepackage[UKenglish]{babel}
+%% \usepackage[UKenglish]{isodate}
+\usepackage{enumitem} % Provides control over spacing in itemize environment
+%% \usepackage{epstopdf} % Can include ps/eps figures when using pdflatex
+\usepackage{cite}%,notoccite}     % So multiple references look like [1-4] instead of [1,2,3,4]
+%% % \hypersetup{colorlinks=true}
+%% \usepackage{authblk}
+%% \usepackage[toc,page]{appendix}
+\usepackage{adjustbox} 
+\usepackage[abs]{overpic} 
+
+%% \usepackage{courier}
+\usepackage{booktabs}
+\usepackage{epstopdf}
+\usepackage{enumitem}
+%% \usepackage{authblk}
+%% \usepackage{chngcntr}% http://ctan.org/pkg/chngcntr
+%% \counterwithout{paragraph}{section}
+\DeclareGraphicsRule{*}{mps}{*}{} % convert *.mps files (important!)
+\DeclareGraphicsExtensions{.pdf}  % include pdf files by default
+
+%% %\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{feynmp}%%%{feynmp}
+\usepackage{setspace}
+\usepackage{lscape}
+%%\usepackage{ragged2e}
+\onehalfspacing
+%linespread{1.5}
+\usepackage[inner=4cm,outer=2cm]{geometry}
+% \DeclareRobustCommand\nocite[1]{%
+%     {\def\cite##1{\ignorespaces}#1}}
+% \newcommand\nocitecaption[1]{\caption[\nocite{#1}]{#1}}
+\usepackage[bottom]{footmisc}
+\usepackage{dutchcal}
+\usepackage{MyCommand}
+\usepackage{accents}
+% \usepackage[explicit]{titlesec}
+
+% \titleformat{\subparagraph}
+% {\it}{\thesection}{}{#1}
+
+% \renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%
+% %  {-3.25ex\@plus -1ex \@minus -.2ex}%
+%   {-3.25ex\@plus -1ex \@minus -.2ex}%
+%   {0.0001pt \@plus .2ex}%
+%   {\normalfont\normalsize\bfseries}}

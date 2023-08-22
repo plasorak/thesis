@@ -1,0 +1,171 @@
+\newcommand{\extensionimage}{png}
+
+\usepackage{afterpage}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \newpage}
+
+
+
+
+
+
+% % Neutrino experiment
+% \newcommand{\MB}{{MiniBooNE}\xspace}
+% \newcommand{\NOMAD}{{NOMAD}\xspace}
+% \newcommand{\DUNE}{{DUNE}\xspace}
+% \newcommand{\LSND}{{LSND}\xspace}
+% \newcommand{\MINOS}{{MINOS}\xspace}
+% \newcommand{\MINERVA}{{MINER$\nu$A}\xspace}
+% \newcommand{\NOVA}{{NO}\(\nu\){A}\xspace}
+
+% \newcommand{\NEUT}{{NEUT}\xspace}
+% \newcommand{\GENIE}{{GENIE}\xspace}
+
+% \newcommand{\TN}{{Technical Note}\xspace}
+
+% % T2K/HK Experiment
+% \newcommand{\ND}{{ND280}\xspace}
+% \newcommand{\JPARC}{{J-PARC}\xspace}
+% \newcommand{\TK}{{T2K}\xspace}
+% \newcommand{\MR}{{MR}\xspace}
+% \newcommand{\INGRID}{{INGRID}\xspace}
+% \newcommand{\SK}{{SK}\xspace}
+% \newcommand{\HK}{{HK}\xspace}
+% \newcommand{\TITUS}{{TITUS}\xspace}
+% \newcommand{\K}{{Kamiokande}\xspace}
+
+\newcommand{\offaxis}{$2.5^\circ$\xspace}
+\newcommand{\energy}{600~MeV\xspace}
+
+
+% \newcommand{\BANFF}{BANFF\xspace}
+% \newcommand{\PID}{PID\xspace}
+
+
+% Neutrinos
+\newcommand{\nue}{{$\nu_e$}\xspace}
+\newcommand{\numu}{{$\nu_\mu$}\xspace}
+\newcommand{\anue}{{$\bar{\nu}_e$}\xspace}
+\newcommand{\anumu}{{$\bar{\nu}_\mu$}\xspace}
+\newcommand{\gam}{{$\gamma$}\xspace}
+\newcommand{\piz}{{$\pi^0$}\xspace}
+\newcommand{\pipm}{{$\pi^\pm$}\xspace}
+\newcommand{\pip}{{$\pi^{+}$}\xspace}
+\newcommand{\pim}{{$\pi^{-}$}\xspace}
+\newcommand{\pion}{{$\pi$}\xspace}
+\newcommand{\imagewidth}{0.48}
+
+
+% % Reactions
+% \newcommand{\DIS}{{DIS}\xspace}
+% \newcommand{\NC}{{NC}\xspace}
+% \newcommand{\EM}{{EM}\xspace}
+% \newcommand{\SIS}{{SIS}\xspace}
+% \newcommand{\CC}{{CC}\xspace}
+% \newcommand{\COH}{{COH}\xspace}
+% \newcommand{\MEC}{{MEC}\xspace}
+% \newcommand{\CCzpi}{{CC}$0\pi$\xspace}
+% \newcommand{\CConepi}{{CC}$1\pi$\xspace}
+% \newcommand{\CCQE}{{CCQE}\xspace}
+% \newcommand{\QE}{{QE}\xspace}
+% \newcommand{\NCEL}{{NCEl}\xspace}
+% \newcommand{\RES}{{RES}\xspace}
+% \newcommand{\NCg}{{NC}$\gamma$\xspace}
+% \newcommand{\NCgamma}{{NC~gamma}\xspace}
+% \newcommand{\ncgamma}{{NC~gamma}\xspace}
+% \newcommand{\ncg}{{NC~gamma}\xspace}
+\newcommand{\nisp}{{neutrino-induced single photons}\xspace}
+\newcommand{\Nisp}{{Neutrino-induced single photons}\xspace}
+\newcommand{\NISP}{{Neutrino-Induced Single Photons}\xspace}
+
+
+% \newcommand{\NCpiz}{{NC}$\pi^0$\xspace}
+
+
+% % ND280 Subdetectors
+% \newcommand{\ECal}{{ECal}\xspace}
+% \newcommand{\PMT}{{PMT}\xspace}
+% \newcommand{\ECAL}{{ECal}\xspace}
+% \newcommand{\DSECAL}{{DsECal}\xspace}
+% \newcommand{\BRECAL}{{BrECal}\xspace}
+% \newcommand{\PDECAL}{{P0DECal}\xspace}
+% \newcommand{\BrECal}{{BrECal}\xspace}
+% \newcommand{\DsECal}{{DsECal}\xspace}
+% \newcommand{\SMRD}{{SMRD}\xspace}
+% \newcommand{\PD}{P0D\xspace}
+% \newcommand{\POD}{P0D\xspace}
+% \newcommand{\OOFV}{OOFV\xspace}
+% \newcommand{\PODECAL}{P0DECal\xspace}
+% \newcommand{\TPC}[1]{TPC#1\xspace}
+% \newcommand{\FGD}[1]{FGD#1\xspace}
+
+% \newcommand{\FV}{{FV}\xspace}
+
+% % Software version
+% \newcommand{\productionmc}{6B\xspace}
+% \newcommand{\productiondata}{6M\xspace}
+% \newcommand{\highland}{\texttt{Highland2}\xspace}
+% \newcommand{\psyche}     {\texttt{Psyche}\xspace}
+% \newcommand{\highlandpsyche}{\highland{2} / \psyche \xspace}
+% \newcommand{\highlandver}{v2r13\xspace}
+% \newcommand{\psychever}{v3r15\xspace}
+% \newcommand{\gammaNCAnalysis} {\texttt{gammaNCAnalysis}\xspace}
+% \newcommand{\gammaNCSelection}{\texttt{gammaNCSelection}\xspace}
+% \newcommand{\pileUpSelection} {\texttt{pileUpSelection}\xspace}
+% \newcommand{\gammaNCAnalysisver}{v1r0\xspace}
+
+% \newcommand{\efficiency}{0.0105\xspace}
+
+% \newcommand{\missing}{MISSING\xspace}
+
+% \newcommand{\unsure}{UNSURE\xspace}
+% \newcommand{\addref}{ADD REF\xspace}
+
+
+\newcommand{\mychapter}[2]{
+    \setcounter{chapter}{#1}
+    \setcounter{section}{0}
+    \chapter{#2}
+%    \addcontentsline{toc}{chapter}{#2}
+}
+
+\newcommand{\mychapternotoc}[2]{
+    \setcounter{chapter}{#1}
+    \setcounter{section}{0}
+    \chapter*{#2}
+  }
+\usepackage[explicit]{titlesec}
+%\usepackage{ulem}
+
+%\renewcommand{\thesubsubsection}{\alph{subsubsection}}
+\setcounter{secnumdepth}{3}
+
+% \titleformat{name=\paragraph,numberless}[runin]
+%   {\normalfont\normalsize\bfseries}{}{15pt}{#1}}
+% \titleformat{\subparagraph}[runin]
+%   {\normalfont\normalsize\bfseries}{}{15pt}{\uline{\theparagraph\hspace*{1em}#1.}}
+% \titleformat{name=\subparagraph,numberless}[runin]
+%   {\normalfont\normalsize\bfseries}{}{15pt}{\uline{#1.}}
+
+
+
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% \renewcommand{\chaptermark}[1]{%
+%   \markboth{\MakeUppercase{Chap.\thechapter.\ #1}}{}}
+% \rhead{\leftmark}
+% \chead{}
+% \lhead{}
+
+  
+\newcommand\brabar{\raisebox{-4.0pt}{\scalebox{.25}{
+\textbf{(}}}\raisebox{-4.0pt}{{\_}}\raisebox{-4.0pt}{\scalebox{.25}{\textbf{)
+}}}}
+\newcommand{\bbar}[1]{\accentset{\brabar}{#1}}
+\newcommand{\bplus}[1]{\accentset{(+)}{#1}}
+\usepackage{perpage} %the perpage package
+\MakePerPage{footnote} %the perpage package command
+%\renewcommand{\thefootnote}{\roman{fnsymbol}}

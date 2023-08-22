@@ -1,0 +1,129 @@
+%%% Local Variables:
+%%% TeX-master: "master"
+%%% End:
+
+\documentclass[a4paper,11pt,twoside]{report}
+%\documentclass[a4paper,11pt,twoside]{report}
+
+\input{config.tex}
+\input{CutValues.tex}
+\input{Error.tex}
+\input{Result.tex}
+\input{Glossary.tex}
+
+
+\begin{document}
+\unitlength = 1mm
+\newgeometry{top=1in,bottom=1in,outer=2cm,inner=2cm}
+\input{title.tex}
+
+\restoregeometry
+\blankpage
+\input{statement.tex}
+\newpage
+\blankpage
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\input{abstract.tex}
+\newpage
+\blankpage
+
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements and dedication}
+\input{acknowledgements.tex}
+
+\newpage
+\blankpage
+\tableofcontents
+
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+\newpage
+\blankpage
+
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+\newpage
+
+\setglossarystyle{list}
+\printglossary[title=List of Terms,toctitle=Terms and abbreviations]
+\newpage
+
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+\label{chap:introduction}
+\input{Introduction.tex}
+\clearpage
+\newpage
+\blankpage
+
+\setcounter{chapter}{0}
+
+\chapter{Neutrino Physics}
+\label{chap:neutrinophysics}
+\input{NeutrinoPhysics.tex}
+\clearpage
+\newpage
+\blankpage
+
+\chapter{The T2K Experiment}
+\label{chap:t2k}
+\input{T2KExperiment.tex}
+\clearpage
+\newpage
+\blankpage
+
+\chapter{Electromagnetic Calorimeter data quality}
+\label{chap:dataquality}
+\input{DataQuality.tex}
+\clearpage
+
+\chapter{Neutrino Neutral Current single photon phenomenology}
+\label{chap:pheno}
+\input{Pheno.tex}
+\clearpage
+
+\chapter{Single photon selection}
+\label{chap:select}
+\input{SearchForNCGamma.tex}
+\clearpage
+
+\chapter{Systematic uncertainties}
+\label{chap:syst}
+\input{Systematics.tex}
+\clearpage
+
+\chapter{Results}
+\label{chap:result}
+\input{ResultNCGamma.tex}
+\clearpage
+\newpage
+\blankpage
+
+\chapter{Fitting the ND280 samples to constrain oscillation analysis
+  systematic errors with electron samples}
+\label{chap:banff}
+\input{FittingND280Samples.tex}
+\clearpage
+
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
+\input{Conclusion.tex}
+\clearpage
+\newpage
+\blankpage
+
+\appendix
+\input{appendix.tex}
+\clearpage
+\newpage
+\blankpage
+
+\addcontentsline{toc}{chapter}{References}
+\bibliographystyle{habbrv}%\bibliographystyle{aipproc}
+\bibliography{Thesis}{}
+\newpage
+\blankpage
+\blankpage
+
+\end{document}

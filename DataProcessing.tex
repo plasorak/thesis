@@ -1,0 +1,281 @@
+
+This section covers three topics: how to process the recorded data,
+the software used for the selection and finally the data sets
+\Gls{POT} that are used in the analyses.
+
+\subsection{Data processing}
+\label{subsec:dataprocessing}
+In this subsection, the data processing steps are explained. In
+summary, the data has to trigger the detector to be recorded, it is
+then calibrated. A reconstruction software is run on the calibrated
+data and the data is put in a light weight format to be used in the
+selections and analyses.
+
+\subsubsection{Triggering}
+\label{subsubsec:triggers}
+Each readout (such as the \Glspl{RMM} in the case of the \Gls{ECal})
+is connected to a Slave Clock Module (\Gls{SCM}) which instructs to
+record the data of the subdetector each time they receive a trigger
+word. All the subdetectors are equipped with their own \Glspl{SCM} so
+that each one can be operated alone for debugging and calibration
+without the need to have the whole \Gls{ND} running.
+
+Since the triggering is related to the timing of the neutrino, a
+Master Clock Module (\Gls{MCM}) which controls all the \Glspl{SCM} is
+synchronised to a GPS-based clock that indicates when the neutrino
+spills are created (so-called ``beam triggers''). There are also two
+cosmic triggers that allow to record data from cosmic muon that happen
+outside the beam timing window. The cosmic trigger records the event
+when:
+\begin{itemize}[noitemsep,topsep=0pt]
+\item the two \Glspl{FGD} trigger,
+\item or two opposite side subdetectors (such as top and bottom
+  \Gls{SMRD} modules, left and right side \Gls{BrECal}, \Gls{PD} and
+  \Gls{DsECal}) are triggered in the same time.
+\end{itemize}
+More information about the Data Acquisition at the \Gls{ND} and
+triggers can be found in~\cite{T2K2011}.
+
+\subsubsection{Calibration}
+\label{subsubsec:calibration}
+Broadly, there are two types of calibrations. The ones that are done
+on scintillator subdetectors (\Glspl{FGD}, \Gls{ECal}, \Gls{PD} and
+\Gls{SMRD}), and the calibration that is done on the \Glspl{TPC}. The
+calibration is made from constants that are in a MySQL database and is
+done by a package called ``\texttt{oaCalib}'' that gets called during
+the data processing.
+
+\paragraph{Scintillator subdetectors calibration}
+The aim is to correct the detector effects on the energy recorded by
+the detector and on the timing of the event. It involves precise
+knowledge of the subdetector and can change over time during the run
+or the day.
+
+Common effects that get corrected are electronic noise, bar-to-bar
+corrections and \Gls{ADC} corrections, attenuation of scintillation
+photon with to the \Gls{MPPC} and the ageing of the scintillator.
+
+To calibrate these detectors, LEDs are placed in the detector and can
+be used to measure the response of the subdetector to the known LED
+pulses. \Gls{DPT} histograms such as the ones in Figure~\ref{fig:DPT}
+are also used for the gain calibration.
+
+\paragraph{TPCs calibration}
+The aim is to correct the drift electron trajectories due to electric
+and magnetic fields inhomogeneities. To achieve this, a laser system
+illuminates some ``dots'' on the cathode that create photo-electrons
+at a known place on the cathode. The pattern they create on the
+MicroMegas can be used for calibration. This method can also be used
+to calculate the gain of the MicroMegas.
+
+\subsubsection{Reconstruction}
+\label{subsubsec:reconstruction}
+
+\paragraph{Time Projection Chamber}
+\label{subparc:tpcreco}
+To reconstruct charged particles creating ionisation electrons in the
+\Glspl{TPC}, the following steps are applied to the waveforms. These
+are the recorded \Gls{ADC} against time for all the
+channels)~\cite{TN072}:
+\begin{enumerate}[noitemsep,topsep=0pt]
+\item Each time the waveform goes over a certain treshold, it is
+  considered that an ionisation electron reached the MicroMega.
+\item The MicroMegas which triggered at a similar time are then
+  clustered horizontally and vertically to create straight lines in
+  the Y and Z directions.
+\item These clusters are then merged if they are close together in
+  space and time. It can happen that the charged particle creates
+  another particle (such as a $\delta$-ray) and thus the merging of
+  the cluster branches in two clusters. In this case, the algorthm
+  chooses the path that creates the longest path. The merging of the
+  clusters can also happen if they are not exactly adjacent.
+\item Next, particle trajectories are adjusted on the merged clusters
+  via a likelihood fit. The particle is assumed to move in a modified
+  helix trajectory, due to the fact that particle looses energy in the
+  gas by ionisation. The transverse drift diffusion (i.e. the fact
+  that drift electron may not move in a straight line in the
+  \Gls{TPC}) is also taken into account.
+\item The determination of the $t_0$ (time at which the track enters
+  the \Gls{TPC}) is important to reconstruct the X position of the
+  particle. This is done by joining the particle with the surrounding
+  detector hits (note these are not reconstructed objects), which have
+  much better timing resolution, via a Kalman fit.
+\end{enumerate}
+
+Once the above steps are done, the momentum of the particle (in MeV)
+can be calculated at all the points of the reconstructed trajectory by
+applying the following equation:
+\begin{equation}
+  \label{eq:momentumtpc}
+  |p| = 0.3 \times q \times B \times R,
+\end{equation}
+where $q$ is the charge of the particle in unit of $e$, $B$ is the
+magnetic field in Tesla and $R$ is the curvature radius in m.
+
+\paragraph{Fine Grain Detector}
+\label{subsubsec:fgdreco}
+The \Gls{FGD} reconstruction~\cite{TN072} provides precise timing and
+vertex information for the charged particle and matching to the
+\Gls{TPC} reconstructed trajectories. The \Gls{FGD} can also be used
+for \Gls{PID}, however, this feature is not used in this analysis and
+therefore it will be omitted here (see \cite{TN072} for its complete
+description). The following steps lead to the reconstruction of the
+\Gls{FGD} tracks:
+\begin{enumerate}[noitemsep,topsep=0pt]
+\item The hits recorded in the \Gls{FGD} are sorted according to their
+  timestamp and ``time bins'' of $100$~ns are created. The hits that
+  are clustered together.
+\item Next, the time between a time bin and the \Gls{TPC} $t_0$ (which
+  comes from individual hits rather than time bins) are compared. If
+  the time is similar, the track is extrapolated from the
+  \Gls{TPC}-\Gls{FGD} by computing a $\chi^2$ between the extrapolated
+  \Gls{TPC} track and the \Gls{FGD} hits in all the layer of the
+  \Gls{FGD} (Kalman fit).
+\item The \Gls{TPC} track trajectory is then refitted with this
+  improved seed and $t_0$.
+\end{enumerate}
+
+\paragraph{Electromagnetic Calorimeter}
+\label{subpar:ecalreco}
+The \Gls{ECal} reconstruction~\cite{TN072} aims to reconstruct charged
+and neutral particles entering the \Gls{ECal}. The algorithm is able
+to differentiate between shower-like and track-like events and
+reconstruct their position, timing and energy. The following steps are
+applied on calibrated hit-level data~\cite{DomBrailsford2016}:
+\begin{enumerate}[noitemsep,topsep=0pt]
+\item The hits are sorted according to their timing and a time
+  bins of $100$~ns are created in a similar way as the \Gls{FGD}, for
+  each bar orientation (thus the clusters will be two-dimentional).
+\item The highest energy hit is selected as the seed for a potential
+  cluster. This cluster is expanded by adding candidate hits that are
+  close in time ($30$~ns) and space (adjacent bar and nearby
+  layer). To be considered as a cluster, it must have at least three
+  hits.
+\item The clusters are then combined together. This is realised
+  after the PCA (Principal Component Analysis) has been run and was
+  able to identify the main axis of the elipsoid formed by the
+  cluster. The clusters are merged if they are close together
+  ($80$~mm) along the direction of the main axis of the cluster that
+  has the largest number of hits, they have consistent timing
+  ($40$~ns) and the charge weighted average of the two clusters should
+  be close together ($40$~cm).
+\item Three-dimentional clusters are created using both the
+  orientations. The matching is done only if the total charge of
+  cluster is similar. The exact cut is tabulated from \Gls{MC}
+  particle guns and varies with the distance from the tracker
+  region.
+\end{enumerate}
+The energy reconstruction and the \Gls{PID} are not used in the
+analysis so it will be omitted here.
+
+\paragraph{Pi-zero Detector}
+\label{subpar:podreco}
+The \Gls{PD} reconstruction is quite similar to the \Gls{ECal} for
+what interests this analysis (the presence of an object or not). More
+detailed information can be found in~\cite{TN072}.
+
+\subsection{Selection software}
+\label{subsec:selecsoft}
+
+The event selection and detector systematic error are done within one
+common software framework on \Gls{TK}, called \gls{highland2}, for
+HIGH Level Analysis and the \Gls{ND}
+version~2~\cite{nd280highland}. The error propagation of the detector
+systematic uncertainties is made with a package called \Gls{psyche},
+for Parametrisation of SYstematics and CHaracterisation of Event,
+which gets called by \gls{highland2} (see \cite{nd280highland} and
+references therein).
+
+\Gls{highland2} provides a framework to analyse the data events from
+the Monte Carlo simulations (\Gls{MC}) or data productions. The
+reconstructed objects can be used in the selections and one has to
+write the event selection based on the characteristics of the
+reconstructed objects.
+
+It is also possible to use the ``systematics mode:'' in this case, a
+loop is created over ``toy experiments,'' when running over the
+\Gls{MC}. They are sets of variations of the detector systematic
+parameters around their nominal values within their errors. Each toy
+experiment leads to a slightly different outcome for the selection and
+thus the set of all the toy experiments encloses the effect of all the
+detector systematic uncertainties.
+
+\subsection{Data sets statistics}
+\label{subsec:datasets}
+For this analysis, the data used is the neutrino mode (\Gls{FHC}) data
+collected by the \Gls{ND} between November 2010 to May 2013. This
+corresponds to $5.80\times 10^{20}$ Protons On Target (\Gls{POT}) as
+shown in Table~\ref{tab:dataset}. In the table, the \Gls{MC} column
+includes all the interaction types simulated by the neutrino
+interaction simulator \Gls{NEUT} which happen in all the parts of the
+detectors enclosed in the \Gls{magnet} (this includes the magnet
+itself which is the most massive part of the detector and which
+constitutes the most part of the \Gls{TK} \Gls{MC}). An additional
+sample is generated for those neutrino interactions from outside the
+\Gls{ND} (thus in the sand) and create particles that go inside the
+\Gls{ND}~\cite{TN077}. Both the sample are denoted ``\gls{magnet}''
+and ``\gls{sand}'' in this section and throughout this thesis.
+
+As will be shown later, this is very important in this particular
+analysis.  In this table, the run is indicated with the \Gls{PD}
+status. If the \Gls{PD} was operating with or without water (Water or
+Air). The beam configuration is indicated by letters: B is for
+$120$~kW and C for $178$~kW.
+
+\begin{table}[ht]
+  \begin{adjustbox}{center}
+    \begin{tabular}{lccccc}
+      \toprule
+      \multirow{2}{*}{Runs} & \multicolumn{5}{c}{POT}\\
+                            & data & \gls{magnet} \Gls{MC} & (ratio) & \gls{sand} \Gls{MC} & (ratio) \\
+      \midrule
+      2 Air   B & $3.59\times 10^{19}$ & $9.24\times 10^{20}$ & $(0.0389)$ & $4.65\times 10^{19}$ & $(0.772)$ \\
+      2 Water B & $4.34\times 10^{19}$ & $1.2 \times 10^{21}$ & $(0.036) $ & $4.75\times 10^{19}$ & $(0.914)$ \\
+      3 Air   B & $2.17\times 10^{19}$ & $4.45\times 10^{20}$ & $(0.0488)$ & $2.35\times 10^{19}$ & $(0.923)$ \\
+      3 Air   C & $1.36\times 10^{20}$ & $2.63\times 10^{21}$ & $(0.0519)$ & $1.64\times 10^{20}$ & $(0.946)$ \\
+      4 Air   C & $1.78\times 10^{20}$ & $3.5 \times 10^{21}$ & $(0.0509)$ & $2.12\times 10^{20}$ & $(0.842)$ \\
+      4 Water C & $1.64\times 10^{20}$ & $1.89\times 10^{21}$ & $(0.0868)$ & $2.11\times 10^{20}$ & $(0.777)$ \\
+      \midrule
+      Total  & \multirow{2}{*}{$5.80\times 10^{20}$} & \multirow{2}{*}{$1.17\times 10^{21}$}& \multirow{2}{*}{$(0.0496)$}  & \multirow{2}{*}{$70.45$} & \multirow{2}{*}{$0.823$} \\
+      data sets     &                        &        &           &       &       \\
+      \midrule
+      \Gls{NCg} signal  &  & \multirow{3}{*}{$6.5\times 10^{23}$} & \\
+      sample     &  & & & & \\ 
+      (beam C)   &  & & & & \\ 
+      \bottomrule
+    \end{tabular}
+  \end{adjustbox}
+  \caption[POT of the data and Monte Carlo (magnet, sand and signal)
+  samples used for the NC$\gamma$ searches]{POT of the data, Monte
+    Carlo (magnet, sand and signal) samples used for the \Gls{NCg}
+    searches, where \gls{magnet} refers to \Gls{MC} events that happen
+    in the volume enclosed by the magnet, \gls{sand} refers to
+    \Gls{MC} events that happen in the surrounding sand of the
+    \Gls{ND}. The ratio denotes the data \Gls{POT}~/~\Gls{MC}
+    \Gls{POT}. The total nominal data sets denotes, in the case of the
+    \Gls{MC}, what is used for prediction of the background and, in
+    the case, of data the recorded real \Gls{ND} data that is used in
+    the analysis. The \Gls{NCg} signal sample denotes the \Gls{MC}
+    sample that was generated with only \Gls{FGD}1 \Gls{NCg} events.}
+  \label{tab:dataset}
+\end{table}
+
+
+However, this \Gls{MC} sample does not have enough events to calculate
+any meaningful quantity regarding \Gls{NCg}, such as the efficiency or
+a smearing matrix. This is because the \Gls{NCg} cross section is very
+small compared to other neutrino cross sections. This is visible in
+Figures~\ref{fig:xsecs_plot} and \ref{fig:integratedncg}: the ratio of
+the total \Gls{NCg} to the total cross section at 1~GeV for a
+\Gls{numu} on carbon as given by the \Gls{NEUT} generator is
+$3.06\times10^{-4}$.
+
+To overcome this problem, an additional \Gls{MC} sample was locally
+generated. It corresponds to a very high exposure of the \Gls{FGD}1 to
+neutrino \Gls{NCg} events as can be seen in Table~\ref{tab:dataset},
+and is being used to calculate efficiency or when needed.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "Thesis"
+%%% End:
